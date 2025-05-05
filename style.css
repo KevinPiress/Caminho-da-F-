@@ -3,144 +3,363 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth; /* Habilita rolagem suave nativa */
 }
 
 :root {
-    /* Paleta de Cores */
-    --cor-primaria: #386641; /* Verde mais escuro */
-    --cor-secundaria: #6A994E; /* Verde médio */
-    --cor-acento: #A7C957;    /* Verde claro/limão */
-    --cor-fundo: #F2E8CF;     /* Fundo Bege/Creme muito claro */
-    --cor-texto: #333333;
-    --cor-branco: #ffffff;
-    --cor-cinza-claro: #f8f9fa;
-    --cor-cinza-escuro: #343a40;
+    /* Paleta de Cores Refinada */
+    --cor-primaria: #2c3e50;    /* Azul Escuro Desaturado */
+    --cor-secundaria: #3498db;  /* Azul Brilhante (Acento Principal) */
+    --cor-acento: #e74c3c;      /* Vermelho/Coral (Acento Secundário) */
+    --cor-acento-alt: #f39c12;  /* Amarelo/Laranja (Para Destaques) */
+    --cor-fundo: #ecf0f1;       /* Cinza Muito Claro (Fundo Principal) */
+    --cor-fundo-light: #ffffff; /* Branco (Fundo de Seções Claras/Cards) */
+    --cor-fundo-dark: #1f2937;    /* Cinza Azulado Escuro (Fundo de Seções Escuras) */
+    --cor-texto-claro: #f8f9fa; /* Texto sobre fundos escuros */
+    --cor-texto-escuro: #34495e; /* Texto principal sobre fundos claros */
+    --cor-texto-muted: #7f8c8d; /* Texto secundário/muted */
+    --cor-overlay: rgba(44, 62, 80, 0.7); /* Overlay para Hero */
+
+    /* Sombras */
+    --shadow-light: 0 2px 5px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 6px 15px rgba(0, 0, 0, 0.15);
 
     /* Fontes */
-    --fonte-titulo: 'Montserrat', sans-serif;
-    --fonte-corpo: 'Open Sans', sans-serif;
+    --fonte-titulo: 'Playfair Display', serif; /* Fonte mais elegante para títulos */
+    --fonte-heading: 'Montserrat', sans-serif; /* Fonte para subtítulos e H2/H3 */
+    --fonte-corpo: 'Open Sans', sans-serif;    /* Fonte principal para texto */
+
+    /* Outros */
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size */
 }
 
 body {
     font-family: var(--fonte-corpo);
-    line-height: 1.7; /* Aumenta um pouco o espaçamento entre linhas */
-    color: var(--cor-texto);
+    line-height: 1.7;
+    color: var(--cor-texto-escuro);
     background-color: var(--cor-fundo);
+    overflow-x: hidden; /* Previne scroll horizontal */
 }
 
-/* Cabeçalho */
-header {
-    background-color: var(--cor-primaria);
-    color: var(--cor-branco);
-    padding: 1rem 0;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Sombra um pouco mais pronunciada */
+/* --- Container --- */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
-header h1 {
-    font-family: var(--fonte-titulo);
+/* --- Tipografia --- */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.3;
     margin-bottom: 0.75rem;
-    font-size: 2.6rem;
-    font-weight: 700; /* Fonte mais pesada para o título */
 }
 
-/* Navegação */
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 18px; /* Um pouco mais de espaço */
-}
-
-nav ul li a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600; /* Texto do menu um pouco mais forte */
-    padding: 5px 0; /* Adiciona padding vertical para área de clique maior */
-    transition: color 0.3s ease, border-bottom-color 0.3s ease;
-    border-bottom: 2px solid transparent; /* Prepara para efeito hover */
-}
-
-nav ul li a:hover,
-nav ul li a:focus { /* :focus para acessibilidade */
-    color: var(--cor-branco);
-    border-bottom-color: var(--cor-acento); /* Linha colorida no hover */
-}
-
-/* Conteúdo Principal */
-main {
-    max-width: 980px; /* Aumenta um pouco a largura máxima */
-    margin: 2.5rem auto; /* Mais espaço acima/abaixo */
-    padding: 0 1.5rem; /* Mais espaçamento lateral */
-}
-
-/* Seções */
-.secao {
-    background-color: var(--cor-branco);
-    margin-bottom: 2.5rem; /* Mais espaço entre seções */
-    padding: 2.5rem; /* Mais padding interno */
-    border-radius: 10px; /* Bordas um pouco mais arredondadas */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
-    overflow: hidden; /* Garante que os filhos animados não "escapem" antes da hora */
-}
-
-/* --- IMPORTANTE: A animação de entrada agora é controlada pelo data-aos no HTML --- */
-/* Removemos a animação CSS anterior para não conflitar com a biblioteca AOS */
-
-.secao h2 {
+h1 {
     font-family: var(--fonte-titulo);
+    font-size: 3.5rem;
+    color: var(--cor-texto-claro); /* No Hero */
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+h2 { /* Títulos de Seção */
+    font-family: var(--fonte-heading);
+    font-size: 2.5rem;
     color: var(--cor-primaria);
-    margin-bottom: 1.8rem; /* Mais espaço abaixo do título da seção */
-    border-bottom: 3px solid var(--cor-secundaria); /* Linha mais grossa e com cor secundária */
-    padding-bottom: 0.6rem;
-    font-size: 1.8rem; /* Tamanho do título da seção */
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+/* Linha decorativa abaixo do H2 */
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--cor-secundaria);
+    border-radius: 2px;
 }
 
-/* Itens de Conteúdo (Versículos, Vídeos, Músicas) */
-.item-conteudo {
-    margin-bottom: 1.8rem;
-    padding: 1.5rem; /* Mais padding */
-    background-color: var(--cor-cinza-claro); /* Fundo muito claro */
-    border-left: 5px solid var(--cor-secundaria); /* Borda mais grossa */
-    border-radius: 6px;
-    transition: box-shadow 0.3s ease; /* Transição para hover */
+h3 { /* Títulos dentro de cards */
+    font-family: var(--fonte-heading);
+    font-size: 1.5rem;
+    color: var(--cor-primaria);
 }
 
-.item-conteudo:hover {
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra no hover */
+p {
+    margin-bottom: 1rem;
+}
+p.lead { /* Texto introdutório em seções */
+    font-size: 1.15rem;
+    color: var(--cor-texto-muted);
+    font-weight: 400;
+}
+p.subtitle { /* Subtítulo no Hero */
+     font-size: 1.25rem;
+     color: rgba(255, 255, 255, 0.85);
+     margin-bottom: 2rem;
+     font-weight: 400;
 }
 
-.item-conteudo:last-child {
-    margin-bottom: 0; /* Remove margem do último item dentro de uma seção */
+a {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+a:hover {
+    color: var(--cor-primaria);
 }
 
-/* Estilo para Versículos */
 blockquote {
     font-style: italic;
-    font-size: 1.15rem; /* Ligeiramente maior */
-    color: #444; /* Cinza um pouco mais escuro */
-    margin-bottom: 0.75rem; /* Mais espaço */
-    padding-left: 1rem; /* Pequeno recuo */
-    border-left: 3px solid var(--cor-acento); /* Detalhe com cor de acento */
+    font-size: 1.1rem;
+    color: var(--cor-texto-muted);
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    border-left: 4px solid var(--cor-secundaria);
 }
 
 blockquote footer {
     font-style: normal;
     font-size: 0.95rem;
-    color: #666;
+    color: var(--cor-texto-escuro);
     text-align: right;
     margin-top: 0.5rem;
+    font-weight: 600;
 }
 
-/* Container para Vídeos (Responsivo) - Mantido igual */
+/* --- Botões --- */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-family: var(--fonte-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+}
+.btn-primary:hover {
+    background-color: #2980b9; /* Darker blue */
+    color: var(--cor-texto-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
+}
+
+.btn-secondary {
+    background-color: var(--cor-acento);
+    color: var(--cor-texto-claro);
+     box-shadow: 0 4px 6px rgba(231, 76, 60, 0.3);
+}
+.btn-secondary:hover {
+    background-color: #c0392b; /* Darker red */
+    color: var(--cor-texto-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(231, 76, 60, 0.4);
+}
+
+
+/* --- Header / Navegação --- */
+#main-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent; /* Starts transparent */
+    padding: 1rem 0;
+    transition: background-color var(--transition-speed) ease, padding var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+#main-header.scrolled {
+    background-color: rgba(44, 62, 80, 0.95); /* Semi-transparent dark blue on scroll */
+    padding: 0.75rem 0;
+    box-shadow: var(--shadow-medium);
+}
+
+#main-header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: var(--fonte-titulo);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cor-texto-claro);
+}
+#main-header.scrolled .nav-logo {
+     color: var(--cor-texto-claro); /* Keep logo color */
+}
+
+#main-header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+#main-header nav ul li {
+    margin-left: 25px;
+}
+
+#main-header nav ul li a {
+    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--fonte-heading);
+    font-weight: 600;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: color var(--transition-speed) ease, border-bottom-color var(--transition-speed) ease;
+}
+
+#main-header nav ul li a:hover,
+#main-header nav ul li a:focus,
+#main-header nav ul li a.active { /* Add .active class via JS if needed for current section */
+    color: var(--cor-branco);
+    border-bottom-color: var(--cor-secundaria);
+}
+
+/* --- Hero Section --- */
+#hero {
+    min-height: 100vh; /* Full viewport height */
+    background: url('images/placeholder-hero.jpg') no-repeat center center/cover; /* <<< REPLACE IMAGE */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cor-texto-claro);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-overlay);
+}
+
+.hero-content {
+    position: relative; /* To sit above overlay */
+    z-index: 1;
+    max-width: 800px;
+}
+.hero-content .highlight {
+    color: var(--cor-acento-alt); /* Highlight color */
+}
+
+
+/* --- Seções --- */
+.secao {
+    padding: 5rem 0;
+    overflow: hidden; /* For AOS */
+}
+.secao.bg-light {
+    background-color: var(--cor-fundo-light);
+}
+.secao.bg-dark {
+    background-color: var(--cor-fundo-dark);
+    color: var(--cor-texto-claro);
+}
+.secao.bg-dark h2 {
+    color: var(--cor-texto-claro);
+}
+.secao.bg-dark h2::after {
+    background-color: var(--cor-acento-alt); /* Different underline on dark */
+}
+.secao.bg-dark p.lead {
+    color: rgba(236, 240, 241, 0.8);
+}
+
+/* --- Cards --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--cor-fundo-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    overflow: hidden; /* Ensures content stays within rounded corners */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    display: flex; /* Added for flex properties */
+    flex-direction: column; /* Stack content vertically */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-dark);
+}
+
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1; /* Allow content to fill space */
+    display: flex;
+    flex-direction: column;
+}
+.card-content p {
+     color: var(--cor-texto-muted);
+     font-size: 0.95rem;
+     flex-grow: 1; /* Push button to bottom */
+     margin-bottom: 1.5rem;
+}
+.card-content .btn {
+    margin-top: auto; /* Push button to bottom */
+    align-self: flex-start; /* Align button left */
+}
+
+/* Specific Card Types */
+.card-featured { /* For Verse of the Day */
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    box-shadow: var(--shadow-medium);
+    padding: 2rem;
+}
+.card-featured blockquote {
+    border-left-color: var(--cor-acento-alt);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem;
+}
+.card-featured blockquote footer {
+    color: var(--cor-acento-alt);
+    font-weight: 700;
+}
+
+.card-img-top { /* For Music Cards */
+    width: 100%;
+    height: 200px; /* Adjust as needed */
+    object-fit: cover; /* Crop image nicely */
+    display: block;
+}
+
+.video-card .card-content {
+    padding-top: 1rem; /* Less padding if video is primary */
+}
+
+/* --- Container para Vídeos (Responsivo) --- */
 .container-video {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
@@ -148,109 +367,101 @@ blockquote footer {
     overflow: hidden;
     max-width: 100%;
     background: #000;
-    border-radius: 6px; /* Arredonda o container também */
+    /* Removed border-radius from here, apply to card */
 }
-
 .container-video iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    border: 0; /* Garante que não haja borda no iframe */
+    border: 0;
 }
 
-/* Botão de Música */
-.botao-musica {
-    display: inline-block;
-    background-color: var(--cor-secundaria); /* Cor secundária */
-    color: white;
-    padding: 12px 24px; /* Botão maior */
-    text-decoration: none;
-    border-radius: 25px; /* Botão mais arredondado (pilula) */
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 0.5rem; /* Espaço acima do botão */
+/* --- Seção Contato --- */
+#contato .lead {
+    margin-bottom: 2.5rem;
 }
-
-.botao-musica:hover {
-    background-color: var(--cor-primaria); /* Escurece no hover */
-    transform: translateY(-2px); /* Leve levantada no hover */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+.contact-links p {
+    margin-bottom: 1rem;
 }
-
-/* Link de Contato */
 .link-contato {
-    color: var(--cor-primaria);
+    color: var(--cor-secundaria); /* Blue on dark background */
     text-decoration: none;
     font-weight: 600;
-    border-bottom: 1px dotted var(--cor-primaria);
-    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+    font-size: 1.2rem;
+    transition: color var(--transition-speed) ease;
+    border-bottom: 1px dotted transparent; /* Prepare for hover */
+    padding-bottom: 2px;
 }
-
 .link-contato:hover {
-    color: var(--cor-secundaria);
-    border-bottom-color: var(--cor-secundaria);
+    color: var(--cor-acento-alt); /* Orange on hover */
+    border-bottom-color: var(--cor-acento-alt);
+}
+.link-contato i { /* Icon styling */
+    margin-right: 0.75rem;
+    font-size: 1.3rem;
+    vertical-align: middle; /* Align icon better */
 }
 
-/* Rodapé */
-footer {
+
+/* --- Footer --- */
+#main-footer {
+    background-color: var(--cor-primaria);
+    color: rgba(236, 240, 241, 0.7); /* Muted light text */
     text-align: center;
-    margin-top: 4rem; /* Mais espaço antes do rodapé */
-    padding: 2rem; /* Mais padding no rodapé */
-    background-color: var(--cor-cinza-escuro);
-    color: #ccc;
+    padding: 2rem 0;
+    margin-top: 3rem; /* Space above footer */
     font-size: 0.9rem;
 }
-
-footer p {
+#main-footer p {
     margin-bottom: 0.5rem;
 }
-
-footer p:last-child {
+#main-footer p:last-child {
     margin-bottom: 0;
 }
 
-/* --- Media Queries para Telas Menores (Responsividade) --- */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2.2rem; /* Ajusta tamanho */
-    }
-    nav ul li {
-        display: block;
-        margin: 12px 0; /* Ajusta espaçamento vertical menu */
-    }
-    main {
-        margin: 1.5rem auto;
-        padding: 0 1rem; /* Reduz padding lateral */
-    }
-    .secao {
-        padding: 1.8rem; /* Reduz padding da seção */
-    }
-     .secao h2 {
-        font-size: 1.6rem; /* Ajusta tamanho */
-    }
+/* --- Utilities --- */
+.text-center {
+    text-align: center;
 }
 
-@media (max-width: 480px) {
-    body {
-        font-size: 16px; /* Garante boa legibilidade */
-        line-height: 1.6;
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    .container {
+        max-width: 960px;
     }
-    header h1 {
-        font-size: 1.9rem;
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.2rem; }
+    .card-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+    html { font-size: 15px; } /* Slightly smaller base */
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; margin-bottom: 2rem;}
+    .secao { padding: 3.5rem 0; }
+
+    /* Mobile Menu (Basic Toggle Example - Needs JS for full functionality) */
+    #main-header nav ul {
+        /* Hide by default - Requires JS to show */
+         display: none;
+         /* Basic Styles when shown: */
+         /* position: absolute; top: 100%; left: 0; width: 100%; background: var(--cor-primaria); flex-direction: column; text-align: center; */
     }
-     .secao {
-        padding: 1.5rem;
-        border-radius: 8px; /* Reduz levemente borda */
-    }
-    .secao h2 {
-        font-size: 1.4rem;
-    }
-    blockquote {
-        font-size: 1.1rem;
-    }
-    .botao-musica {
-        padding: 10px 20px; /* Botão um pouco menor */
-    }
+     #main-header nav ul li { margin: 10px 0; }
+     /* Add a burger menu icon toggle here */
+
+    .card-grid { grid-template-columns: 1fr; } /* Stack cards */
+    #hero { min-height: 80vh; } /* Slightly less tall hero */
+}
+
+@media (max-width: 576px) {
+    html { font-size: 14px; }
+    h1 { font-size: 2.1rem; }
+    h2 { font-size: 1.8rem; }
+    .hero-content .btn { padding: 10px 24px; font-size: 0.9rem;}
+    .secao { padding: 2.5rem 0; }
+    .container { padding: 0 1rem; } /* Less padding on small screens */
+    .contact-links .link-contato { font-size: 1.1rem; }
 }

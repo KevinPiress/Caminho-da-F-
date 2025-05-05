@@ -1,0 +1,256 @@
+/* Reset básico e configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth; /* Habilita rolagem suave nativa */
+}
+
+:root {
+    /* Paleta de Cores */
+    --cor-primaria: #386641; /* Verde mais escuro */
+    --cor-secundaria: #6A994E; /* Verde médio */
+    --cor-acento: #A7C957;    /* Verde claro/limão */
+    --cor-fundo: #F2E8CF;     /* Fundo Bege/Creme muito claro */
+    --cor-texto: #333333;
+    --cor-branco: #ffffff;
+    --cor-cinza-claro: #f8f9fa;
+    --cor-cinza-escuro: #343a40;
+
+    /* Fontes */
+    --fonte-titulo: 'Montserrat', sans-serif;
+    --fonte-corpo: 'Open Sans', sans-serif;
+}
+
+body {
+    font-family: var(--fonte-corpo);
+    line-height: 1.7; /* Aumenta um pouco o espaçamento entre linhas */
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+}
+
+/* Cabeçalho */
+header {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    padding: 1rem 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Sombra um pouco mais pronunciada */
+}
+
+header h1 {
+    font-family: var(--fonte-titulo);
+    margin-bottom: 0.75rem;
+    font-size: 2.6rem;
+    font-weight: 700; /* Fonte mais pesada para o título */
+}
+
+/* Navegação */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 18px; /* Um pouco mais de espaço */
+}
+
+nav ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600; /* Texto do menu um pouco mais forte */
+    padding: 5px 0; /* Adiciona padding vertical para área de clique maior */
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+    border-bottom: 2px solid transparent; /* Prepara para efeito hover */
+}
+
+nav ul li a:hover,
+nav ul li a:focus { /* :focus para acessibilidade */
+    color: var(--cor-branco);
+    border-bottom-color: var(--cor-acento); /* Linha colorida no hover */
+}
+
+/* Conteúdo Principal */
+main {
+    max-width: 980px; /* Aumenta um pouco a largura máxima */
+    margin: 2.5rem auto; /* Mais espaço acima/abaixo */
+    padding: 0 1.5rem; /* Mais espaçamento lateral */
+}
+
+/* Seções */
+.secao {
+    background-color: var(--cor-branco);
+    margin-bottom: 2.5rem; /* Mais espaço entre seções */
+    padding: 2.5rem; /* Mais padding interno */
+    border-radius: 10px; /* Bordas um pouco mais arredondadas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
+    overflow: hidden; /* Garante que os filhos animados não "escapem" antes da hora */
+}
+
+/* --- IMPORTANTE: A animação de entrada agora é controlada pelo data-aos no HTML --- */
+/* Removemos a animação CSS anterior para não conflitar com a biblioteca AOS */
+
+.secao h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-primaria);
+    margin-bottom: 1.8rem; /* Mais espaço abaixo do título da seção */
+    border-bottom: 3px solid var(--cor-secundaria); /* Linha mais grossa e com cor secundária */
+    padding-bottom: 0.6rem;
+    font-size: 1.8rem; /* Tamanho do título da seção */
+}
+
+/* Itens de Conteúdo (Versículos, Vídeos, Músicas) */
+.item-conteudo {
+    margin-bottom: 1.8rem;
+    padding: 1.5rem; /* Mais padding */
+    background-color: var(--cor-cinza-claro); /* Fundo muito claro */
+    border-left: 5px solid var(--cor-secundaria); /* Borda mais grossa */
+    border-radius: 6px;
+    transition: box-shadow 0.3s ease; /* Transição para hover */
+}
+
+.item-conteudo:hover {
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra no hover */
+}
+
+.item-conteudo:last-child {
+    margin-bottom: 0; /* Remove margem do último item dentro de uma seção */
+}
+
+/* Estilo para Versículos */
+blockquote {
+    font-style: italic;
+    font-size: 1.15rem; /* Ligeiramente maior */
+    color: #444; /* Cinza um pouco mais escuro */
+    margin-bottom: 0.75rem; /* Mais espaço */
+    padding-left: 1rem; /* Pequeno recuo */
+    border-left: 3px solid var(--cor-acento); /* Detalhe com cor de acento */
+}
+
+blockquote footer {
+    font-style: normal;
+    font-size: 0.95rem;
+    color: #666;
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+/* Container para Vídeos (Responsivo) - Mantido igual */
+.container-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    border-radius: 6px; /* Arredonda o container também */
+}
+
+.container-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* Garante que não haja borda no iframe */
+}
+
+/* Botão de Música */
+.botao-musica {
+    display: inline-block;
+    background-color: var(--cor-secundaria); /* Cor secundária */
+    color: white;
+    padding: 12px 24px; /* Botão maior */
+    text-decoration: none;
+    border-radius: 25px; /* Botão mais arredondado (pilula) */
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 0.5rem; /* Espaço acima do botão */
+}
+
+.botao-musica:hover {
+    background-color: var(--cor-primaria); /* Escurece no hover */
+    transform: translateY(-2px); /* Leve levantada no hover */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Link de Contato */
+.link-contato {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dotted var(--cor-primaria);
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.link-contato:hover {
+    color: var(--cor-secundaria);
+    border-bottom-color: var(--cor-secundaria);
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    margin-top: 4rem; /* Mais espaço antes do rodapé */
+    padding: 2rem; /* Mais padding no rodapé */
+    background-color: var(--cor-cinza-escuro);
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Media Queries para Telas Menores (Responsividade) --- */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem; /* Ajusta tamanho */
+    }
+    nav ul li {
+        display: block;
+        margin: 12px 0; /* Ajusta espaçamento vertical menu */
+    }
+    main {
+        margin: 1.5rem auto;
+        padding: 0 1rem; /* Reduz padding lateral */
+    }
+    .secao {
+        padding: 1.8rem; /* Reduz padding da seção */
+    }
+     .secao h2 {
+        font-size: 1.6rem; /* Ajusta tamanho */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 16px; /* Garante boa legibilidade */
+        line-height: 1.6;
+    }
+    header h1 {
+        font-size: 1.9rem;
+    }
+     .secao {
+        padding: 1.5rem;
+        border-radius: 8px; /* Reduz levemente borda */
+    }
+    .secao h2 {
+        font-size: 1.4rem;
+    }
+    blockquote {
+        font-size: 1.1rem;
+    }
+    .botao-musica {
+        padding: 10px 20px; /* Botão um pouco menor */
+    }
+}
